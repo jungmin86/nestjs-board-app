@@ -1,9 +1,12 @@
-import { BoardStatus } from "./board.status"
 
 export interface Board {
     id: string,
-    titme: string,
+    title: string,
     description: string,
     status: BoardStatus
 }
 
+export enum BoardStatus {
+    PUBLIC = 'PUBLIC',
+    PRIVATE = 'PRIVATE'
+}
