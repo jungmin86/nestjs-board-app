@@ -1,25 +1,31 @@
-import { Controller, Get, Post, Body } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param } from '@nestjs/common';
 import { BoardsService } from './boards.service'; 
 import { Board } from './board.model';
+import { CreateBoardDTO } from './dto/create-board.dto';
 
 @Controller('boards') //localhost:3000/boards
 export class BoardsController {
     constructor(private boardsService: BoardsService) {} 
     
 
-    @Get('/') //localhost:3000/boards (이게 끝)
+    @Get() //localhost:3000/boards (이게 끝)
     getAllBoard(): Board[] {
         return this.boardsService.getAllBoards();
     }
 
     @Post()
     createBoard(
-        @Body('title') title: string, 
-        @Body('description') description: string
+        @Body() createBoardDTO: CreateBoardDTO
     ): Board {
-        return this.boardsService.createBoard(title, description);
+        return this.boardsService.createBoard(createBoardDTO);
     }
     
+    @Get('/:id')
+    getBoardById(
+        @Param('id') id: string
+    ): Board {
+        return this.boardsService.getBoardById(id);
+    }
     
 } // private -> 접근제한자를 파라미터에 선언하면 접근 제한자가 사용된 생성자 파라미터는 클래스 프로퍼티로 선언이 된다.
 // dependency injection

@@ -21,8 +21,15 @@ export class BoardsService {
             description,
             status: BoardStatus.PUBLIC //기본값 : 공개글
         }
-
         this.boards.push(board);
         return board;
     }
+
+    getBoardById(id: string): Board {
+        return this.boards.find((board) => board.id === id);
+    }
+
+    // deleteBoard(id: string): void {
+    //     this.boards = this.boards.filter((board) => board.id !== id); //id가 다른 것 빼고 다 남김 
+    // }
 }
