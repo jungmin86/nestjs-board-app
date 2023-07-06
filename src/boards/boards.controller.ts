@@ -1,6 +1,6 @@
-import { Controller, Get, Post, Body, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Delete, Patch } from '@nestjs/common';
 import { BoardsService } from './boards.service'; 
-import { Board } from './board.model';
+import { Board, BoardStatus } from './board.model';
 import { CreateBoardDTO } from './dto/create-board.dto';
 
 @Controller('boards') //localhost:3000/boards
@@ -30,6 +30,14 @@ export class BoardsController {
     @Delete('/:id')
     deleteBoard(@Param('id') id: string): void {
         this.boardsService.deleteBoard(id);
+    }
+
+    @Patch('/:id/status')
+    updateBoardStatus(
+        @Param('id') id: string,
+        @Body('status') status: BoardStatus
+    ) {
+        return this.boardsService.updateBoardStatus(id, status);
     }
     
 } // private -> 접근제한자를 파라미터에 선언하면 접근 제한자가 사용된 생성자 파라미터는 클래스 프로퍼티로 선언이 된다.

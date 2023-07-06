@@ -29,7 +29,13 @@ export class BoardsService {
         return this.boards.find((board) => board.id === id);
     }
 
-    // deleteBoard(id: string): void {
-    //     this.boards = this.boards.filter((board) => board.id !== id); //id가 다른 것 빼고 다 남김 
-    // }
+    deleteBoard(id: string): void {
+        this.boards = this.boards.filter((board) => board.id !== id); //id가 다른 것 빼고 다 남김 
+    }
+
+    updateBoardStatus(id: string, status: BoardStatus): Board {
+        const board = this.getBoardById(id);
+        board.status = status;
+        return board;
+    }
 }
