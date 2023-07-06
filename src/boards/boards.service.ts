@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { Board } from './board.model';
+import { Board, BoardStatus } from './board.model';
 
 @Injectable()
 export class BoardsService {
@@ -7,5 +7,15 @@ export class BoardsService {
 
     getAllBoards(): Board[] {
         return this.boards;
+    }
+
+    createBoard(title: string, description: string) {
+        const board = {
+            // title: title,
+            // description: description,
+            title,
+            description,
+            status: BoardStatus.PUBLIC //기본값 : 공개글
+        }
     }
 }
