@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Param, Delete, Patch, UsePipes, ValidationPipe } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Delete, Patch, UsePipes, ValidationPipe, NotFoundException } from '@nestjs/common';
 import { BoardsService } from './boards.service'; 
 import { Board, BoardStatus } from './board.model';
 import { CreateBoardDTO } from './dto/create-board.dto';
@@ -25,7 +25,9 @@ export class BoardsController {
     getBoardById(
         @Param('id') id: string
     ): Board {
-        return this.boardsService.getBoardById(id);
+        const found = this.boardsService.getBoardById(id);
+        if (!found) throw new NotFoundException("그런 글은 없다고 ~");
+        return found;
     }
 
     @Delete('/:id')
