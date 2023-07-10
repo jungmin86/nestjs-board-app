@@ -26,7 +26,7 @@ export class BoardsController {
         @Param('id') id: string
     ): Board {
         const found = this.boardsService.getBoardById(id);
-        if (!found) throw new NotFoundException("그런 글은 없다고 ~");
+        if (!found) throw new NotFoundException();
         return found;
     }
 
