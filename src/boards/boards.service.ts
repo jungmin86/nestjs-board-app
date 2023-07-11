@@ -14,6 +14,9 @@ export class BoardsService {
         private boardRepository: BoardRepository,
     ) {}
 
+    getAllBoards(): Promise<Board[]> {
+        return this.boardRepository.getAllBoards();
+    }
 
     createBoard(createBoardDTO: CreateBoardDTO): Promise<Board> {
         return this.boardRepository.createBoard(createBoardDTO);

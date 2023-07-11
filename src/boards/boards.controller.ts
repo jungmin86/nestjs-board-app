@@ -23,6 +23,11 @@ export class BoardsController {
     //     return this.boardsService.createBoard(createBoardDTO);
     // }
 
+    @Get() //localhost:3000/boards (이게 끝)
+    getAllBoards(): Promise<Board[]> {
+        return this.boardsService.getAllBoards();
+    }
+
     @Post()
     @UsePipes(ValidationPipe)
     createBoard(

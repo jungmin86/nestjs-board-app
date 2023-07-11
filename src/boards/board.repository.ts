@@ -10,6 +10,11 @@ export class BoardRepository extends Repository<Board> {
     constructor(private dataSource: DataSource) {
         super(Board, dataSource.createEntityManager());
       }
+
+    
+    async getAllBoards(): Promise<Board[]> {
+        return this.find();
+    }
     
     async createBoard(createBoardDTO: CreateBoardDTO): Promise<Board> {
         const {title, description} = createBoardDTO;
