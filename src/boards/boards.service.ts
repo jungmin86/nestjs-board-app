@@ -1,16 +1,16 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { BoardStatus } from './board-status.enum';
-import { v1 as uuid } from 'uuid';
+// import { BoardStatus } from './board-status.enum';
+// import { v1 as uuid } from 'uuid';
 import { CreateBoardDTO } from './dto/create-board.dto';
 import { BoardRepository } from './board.repository';
-import { InjectRepository } from '@nestjs/typeorm';
+// import { InjectRepository } from '@nestjs/typeorm';
 import { Board } from './board.entity';
 
 @Injectable()
 export class BoardsService {
 
     constructor(
-        @InjectRepository(BoardRepository)
+        // @InjectRepository(BoardRepository)
         private boardRepository: BoardRepository,
     ) {}
 
@@ -34,25 +34,12 @@ export class BoardsService {
     //     return board;
     // }
 
-    async createBoard(createBoardDTO: CreateBoardDTO): Promise<Board> {
-        const {title, description} = createBoardDTO;
-        
-        const board = this.boardRepository.create({
-            title,
-            description,
-            status: BoardStatus.PUBLIC
-        });
-
-        await this.boardRepository.save(board);
-        return board;
+    createBoard(createBoardDTO: CreateBoardDTO): Promise<Board> {
+        return this.boardRepository.createBoard(createBoardDTO);
     }
 
-    async getBoardById(id: number): Promise<Board> {
-        const found = await this.boardRepository.findOne({ where: { id } });
-      
-        if (!found) throw new NotFoundException(`${id}에 해당하는 게시글이 없다.`);
-      
-        return found;
+    getBoardById(id: number): Promise<Board> {
+        return this.boardRepository.getBoardById(id);
       }
       
 
