@@ -15,6 +15,18 @@ export class BoardsService {
     ) {}
 
 
+    createBoard(createBoardDTO: CreateBoardDTO): Promise<Board> {
+        return this.boardRepository.createBoard(createBoardDTO);
+    }
+
+    getBoardById(id: number): Promise<Board> {
+        return this.boardRepository.getBoardById(id);
+      }
+
+    deleteBoard(id: number): Promise<void> {
+        return this.boardRepository.deleteBoard(id);
+    }
+
 
     // getAllBoards(): Board[] {
     //     return this.boards;
@@ -34,13 +46,7 @@ export class BoardsService {
     //     return board;
     // }
 
-    createBoard(createBoardDTO: CreateBoardDTO): Promise<Board> {
-        return this.boardRepository.createBoard(createBoardDTO);
-    }
-
-    getBoardById(id: number): Promise<Board> {
-        return this.boardRepository.getBoardById(id);
-      }
+    
       
 
     // getBoardById(id: string): Board {
