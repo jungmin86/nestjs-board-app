@@ -38,4 +38,11 @@ export class BoardRepository extends Repository<Board> {
         console.log('result', result);
     }
 
+    async updateBoardStatus(id: number, status: BoardStatus): Promise<Board> {
+        const board = await this.getBoardById(id);
+        board.status = status;
+        await this.save(board);
+        return board;
+    }
+
 }

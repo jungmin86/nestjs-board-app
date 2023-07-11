@@ -1,5 +1,5 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-// import { BoardStatus } from './board-status.enum';
+import { BoardStatus } from './board-status.enum';
 // import { v1 as uuid } from 'uuid';
 import { CreateBoardDTO } from './dto/create-board.dto';
 import { BoardRepository } from './board.repository';
@@ -25,6 +25,10 @@ export class BoardsService {
 
     deleteBoard(id: number): Promise<void> {
         return this.boardRepository.deleteBoard(id);
+    }
+
+    updateBoardStatus(id: number, status: BoardStatus): Promise<Board> {
+        return this.boardRepository.updateBoardStatus(id, status);
     }
 
 
