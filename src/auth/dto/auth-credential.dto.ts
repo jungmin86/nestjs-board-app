@@ -12,7 +12,9 @@ export class AuthCredentialDTO {
     @IsNotEmpty()
     @MinLength(4)
     @MaxLength(20)
-    @Matches(/^[a-zA-z0-9]*$/)
+    @Matches(/^[a-zA-z0-9]*$/, {
+        message: "password only accepts english and numbers."
+    })
     password: string;
 
 }
