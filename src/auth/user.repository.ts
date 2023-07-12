@@ -52,4 +52,12 @@ export class UserRepository extends Repository<User> {
         }
     }
 
+    async validate(payload) {
+        const {username} = payload;
+        const user: User = await this.findOne({ where: {username} })
+
+        if(!user)   throw new UnauthorizedException();
+
+        return user;
+    }
 }
