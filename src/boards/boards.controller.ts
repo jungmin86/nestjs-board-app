@@ -1,11 +1,15 @@
-import { Controller, Get, Post, Body, Param, Delete, Patch, UsePipes, ValidationPipe, ParseIntPipe } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Delete, Patch, UsePipes, ValidationPipe, ParseIntPipe, UseGuards } from '@nestjs/common';
 import { BoardsService } from './boards.service'; 
 import { BoardStatus } from './board-status.enum';
 import { CreateBoardDTO } from './dto/create-board.dto';
 import { BoardStatusValidationPipe } from './pipes/board-status-validation.pipe';
 import { Board } from './board.entity';
+import { AuthGuard } from '@nestjs/passport';
+import { User } from 'src/auth/user.entity';
+import { GetUser } from 'src/auth/get-user.decorator';
 
 @Controller('boards') //localhost:3000/boards
+@UseGuards(AuthGuard('jwt'))
 export class BoardsController {
     constructor(private boardsService: BoardsService) {} 
     
@@ -24,8 +28,8 @@ export class BoardsController {
     // }
 
     @Get() //localhost:3000/boards (이게 끝)
-    getAllBoards(): Promise<Board[]> {
-        return this.boardsService.getAllBoards();
+    getAllBoards(@GetUser() user: User): Promise<Board[]> {
+        return this.boardsService.getAllBoards(user);
     }
 
     @Post()
