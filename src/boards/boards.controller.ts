@@ -53,6 +53,7 @@ export class BoardsController {
         @Param('id', ParseIntPipe) id: number,
         @GetUser() user: User
         ): Promise<void> {
+        this.logger.verbose(`User ${user.username} is trying to delete a board. Board Id: ${id}`);
         return this.boardsService.deleteBoard(id, user);
     }
 

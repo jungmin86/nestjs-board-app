@@ -13,7 +13,11 @@ lerna-debug.log*
 
 # OS
 .DS_Store
-/src/configs/typeorm.config.ts
+
+# Configuration
+/src/configs
+/config
+
 
 # Tests
 /coverage
